@@ -236,7 +236,7 @@ def main():
 
     # Start Supabase first
     start_supabase(args.environment)
-
+    
     # Give Supabase some time to initialize
     print("Waiting for Supabase to initialize...")
     time.sleep(10)

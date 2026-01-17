@@ -39,7 +39,7 @@ x-ollama: &service-ollama
     - OLLAMA_CONTEXT_LENGTH=8192
     - OLLAMA_FLASH_ATTENTION=1
     - OLLAMA_KV_CACHE_TYPE=q8_0
-    - OLLAMA_MAX_LOADED_MODELS=2
+    - OLLAMA_MAX_LOADED_MODELS=2    
   volumes:
     - ollama_storage:/root/.ollama
 
@@ -52,6 +52,7 @@ x-init-ollama: &init-ollama
   command:
     - "-c"
     - "sleep 3; OLLAMA_HOST=ollama:11434 ollama pull qwen2.5:7b-instruct-q4_K_M; OLLAMA_HOST=ollama:11434 ollama pull nomic-embed-text"
+    # echo "FROM qwen2.5:7b-instruct-q4_K_M\n\nPARAMETER num_ctx 8096" > Modelfile
 
 services:
   flowise:
@@ -63,7 +64,7 @@ services:
     environment:
         - PORT=3001
         - FLOWISE_USERNAME=${FLOWISE_USERNAME}
-        - FLOWISE_PASSWORD=${FLOWISE_PASSWORD}
+        - FLOWISE_PASSWORD=${FLOWISE_PASSWORD}  
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
@@ -125,7 +126,7 @@ services:
       - 7687/tcp
     environment:
         - NEO4J_AUTH=${NEO4J_AUTH:-"neo4j/your_password"}
-    restart: always
+    restart: always      
 
   caddy:
     container_name: caddy
@@ -141,7 +142,7 @@ services:
       - 80/tcp
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./caddy-addon:/etc/caddy/addons:ro
+      - ./caddy-addon:/etc/caddy/addons:ro      
       - caddy-data:/data:rw
       - caddy-config:/config:rw
     environment:
