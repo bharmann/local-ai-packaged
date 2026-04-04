@@ -9,6 +9,16 @@ Pre-built RAG AI Agent workflows from the video are included in `n8n/backup/work
 
 **IMPORANT**: Supabase has updated a couple environment variables so you may have to add some new default values in your .env that I have in my .env.example if you have had this project up and running already and are just pulling new changes. Specifically, you need to add "POOLER_DB_POOL_SIZE=5" to your .env. This is required if you have had the package running before June 14th.
 
+**February 26th, 2026 Update**: The latest Supabase storage container (`storage-api v1.37.8`) now requires several new environment variables. If you have already been running the Local AI Package and are pulling new changes, you need to add the following to your `.env` file:
+```bash
+GLOBAL_S3_BUCKET=stub
+REGION=stub
+STORAGE_TENANT_ID=stub
+S3_PROTOCOL_ACCESS_KEY_ID=625729a08b95bf1b7ff351a663f3a23c
+S3_PROTOCOL_ACCESS_KEY_SECRET=850181e4652dd023b7a98c58ae0d2d34bd487ee0cc3254aed6eda37307425907
+```
+These are already included in the `.env.example`, so if you are setting up for the first time you just need to copy them over. The `stub` values work fine for local file-based storage. Without these variables, the Supabase storage container will crash on startup with a "Region is missing" error.
+
 ## Important Links
 
 - [Local AI community](https://thinktank.ottomator.ai/c/local-ai/18) forum over in the oTTomator Think Tank
